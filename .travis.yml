@@ -1,0 +1,27 @@
+---
+sudo: false
+
+language: php
+
+services:
+  - docker
+
+php:
+  - '5.6'
+  - '7.0'
+
+matrix:
+  allow_failures:
+    - php: '7.0'
+  fast_finish: true
+
+install:
+  - composer install
+
+script:
+  - vendor/bin/phpunit -c phpunit.xml.dist
+  - vendor/bin/phpcs --standard=psr2 src
+
+after_success:
+  - travis_retry php vendor/bin/coveralls
+...
