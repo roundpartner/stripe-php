@@ -3,9 +3,6 @@ sudo: false
 
 language: php
 
-services:
-  - docker
-
 php:
   - '5.6'
   - '7.0'

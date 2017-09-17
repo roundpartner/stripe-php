@@ -23,9 +23,9 @@ class Stripe extends RestClient
     public function charge($token, $amount, $desc)
     {
         $data = [
-            'token' =>  $token,
-            'amount' =>  $amount,
-            'desc' =>  $desc,
+            'token' => $token,
+            'amount' => $amount,
+            'desc' => $desc,
         ];
         $response = $this->client->post('/charge', [
             'body' => json_encode($data)
@@ -33,6 +33,6 @@ class Stripe extends RestClient
         if (200 !== $response->getStatusCode()) {
             return false;
         }
-        return true;
+        return json_decode($response->getBody());
     }
 }

@@ -38,7 +38,7 @@ class StripeTest extends TestCase
         $client = $this->getClientMock($responses);
         $this->instance->setClient($client);
         $response = $this->instance->charge("tok_visa", 1000, "Test Payment");
-        $this->assertTrue($response);
+        $this->assertInternalType('object', $response);
     }
 
     /**
