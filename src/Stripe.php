@@ -9,7 +9,7 @@ class Stripe extends RestClient
     public function __construct()
     {
         $this->client = new Client([
-            'base_uri' => 'http://0.0.0.0:57493'
+            'base_uri' => 'http://0.0.0.0:57493',
         ]);
     }
 
