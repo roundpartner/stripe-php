@@ -17,15 +17,19 @@ class Stripe extends RestClient
      * @param string $token
      * @param int $amount
      * @param string $desc
+     * @param string $transId
+     * @param string $businessName
      *
      * @return bool
      */
-    public function charge($token, $amount, $desc)
+    public function charge($token, $amount, $desc, $transId = null, $businessName = null)
     {
         $data = [
+            'trans_id' => $transId,
             'token' => $token,
             'amount' => $amount,
             'desc' => $desc,
+            'business_name' => $businessName,
         ];
         $response = $this->client->post('/charge', [
             'body' => json_encode($data)
