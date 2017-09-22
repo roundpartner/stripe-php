@@ -22,7 +22,7 @@ class ResponseProvider
     public static function chargeFails()
     {
         return [
-            [[new Response(400, [], '"error":"{\"status\":400,\"message\":\"There is a part of the token that is not valid: \'invalid\'.\",\"request_id\":\"req_WmBgW8CAe14ZMQ\",\"type\":\"invalid_request_error\"}"}%')]]
+            [[new Response(400, [], '{"error":{"charge":"ch_1B4lBPE6Cs3pyAhaIvaiLPFR","code":"card_declined","message":"Your card was declined.","request_id":"req_7vc2Sv3BxB5JAC","status":402,"type":"card_error"}}')]]
         ];
     }
 }
