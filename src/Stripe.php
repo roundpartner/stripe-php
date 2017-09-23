@@ -72,15 +72,17 @@ class Stripe extends RestClient
      * @param string $account
      * @param string $description
      * @param string $email
+     * @param string $token
      *
      * @return object
      */
-    public function newCustomer($account, $description, $email)
+    public function newCustomer($account, $description, $email, $token = null)
     {
         $data = [
             'account' => $account,
             'desc' => $description,
             'email' => $email,
+            'token' => $token,
         ];
         $response = $this->client->post('/customer', [
             'json' => $data
