@@ -2,13 +2,14 @@
 
 namespace RoundPartner\Stripe;
 
-use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+use RoundPartner\Stripe\Exception\CustomerNotFoundException;
 
 class Stripe extends RestClient
 {
     public function __construct()
     {
-        $this->client = new Client([
+        parent::__construct([
             'base_uri' => 'http://0.0.0.0:57493',
         ]);
     }
@@ -19,10 +20,11 @@ class Stripe extends RestClient
      * @param string $desc
      * @param string $transId
      * @param string $businessName
+     * @param string $customer
      *
      * @return bool
      */
-    public function charge($token, $amount, $desc, $transId = null, $businessName = null)
+    public function charge($token, $amount, $desc, $transId = null, $businessName = null, $customer = null)
     {
         $data = [
             'trans_id' => $transId,
@@ -30,9 +32,58 @@ class Stripe extends RestClient
             'amount' => $amount,
             'desc' => $desc,
             'business_name' => $businessName,
+            'customer' => $customer,
         ];
         $response = $this->client->post('/charge', [
-            'body' => json_encode($data)
+            'json' => $data
+        ]);
+        if (200 !== $response->getStatusCode()) {
+            return false;
+        }
+        return json_decode($response->getBody());
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return object
+     *
+     * @throws CustomerNotFoundException
+     */
+    public function customer($id)
+    {
+        try {
+            $response = $this->client->get('/customer/' . $id);
+        } catch (ClientException $exception) {
+            $response = $exception->getResponse();
+            $json = json_decode($response->getBody());
+            if (404 === $json->error->status) {
+                throw new CustomerNotFoundException($json->error->message, $json->error->status, $exception);
+            }
+            throw $exception;
+        }
+        if (200 !== $response->getStatusCode()) {
+            return false;
+        }
+        return json_decode($response->getBody());
+    }
+
+    /**
+     * @param string $account
+     * @param string $description
+     * @param string $email
+     *
+     * @return object
+     */
+    public function newCustomer($account, $description, $email)
+    {
+        $data = [
+            'account' => $account,
+            'desc' => $description,
+            'email' => $email,
+        ];
+        $response = $this->client->post('/customer', [
+            'json' => $data
         ]);
         if (200 !== $response->getStatusCode()) {
             return false;

@@ -25,4 +25,25 @@ class ResponseProvider
             [[new Response(400, [], '{"error":{"charge":"ch_1B4lBPE6Cs3pyAhaIvaiLPFR","code":"card_declined","message":"Your card was declined.","request_id":"req_7vc2Sv3BxB5JAC","status":402,"type":"card_error"}}')]]
         ];
     }
+
+    public static function getCustomer()
+    {
+        return [
+            [[new Response(200, [], '{"account_balance":0,"business_vat_id":"","currency":"","created":1506114908,"default_source":null,"deleted":false,"delinquent":false,"description":"First test","discount":null,"email":"test@roundpartner.co.uk","id":"cus_BRsEJtkXRxHxPU","livemode":false,"metadata":{},"shipping":null,"sources":{"total_count":0,"has_more":false,"url":"/v1/customers/cus_BRsEJtkXRxHxPU/sources","data":[]},"subscriptions":{"total_count":0,"has_more":false,"url":"/v1/customers/cus_BRsEJtkXRxHxPU/subscriptions","data":[]}}')]]
+        ];
+    }
+
+    public static function GetCustomerNotFound()
+    {
+        return [
+            [[new Response(400, [], '{"error":{"message":"No such customer: cus_BRsEJtkXRxHxP","param":"id","request_id":"req_wUNf8y1QwLKc5X","status":404,"type":"invalid_request_error"}}')]]
+        ];
+    }
+
+    public static function NewCustomer()
+    {
+        return [
+            [[new Response(200, [], '{"account_balance":0,"business_vat_id":"","currency":"","created":1506201248,"default_source":null,"deleted":false,"delinquent":false,"description":"","discount":null,"email":"example@mailinator.com","id":"cus_BSFRjgaYbKzgKD","livemode":false,"metadata":{"account_id":"1"},"shipping":null,"sources":{"total_count":0,"has_more":false,"url":"/v1/customers/cus_BSFRjgaYbKzgKD/sources","data":[]},"subscriptions":{"total_count":0,"has_more":false,"url":"/v1/customers/cus_BSFRjgaYbKzgKD/subscriptions","data":[]}}')]]
+        ];
+    }
 }
