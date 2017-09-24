@@ -26,10 +26,17 @@ class ResponseProvider
         ];
     }
 
+    public static function getCustomers()
+    {
+        return [
+            [[new Response(200, [], '[{"account_balance":0,"business_vat_id":"","currency":"","created":1506114908,"default_source":null,"deleted":false,"delinquent":false,"description":"First test","discount":null,"email":"example@mailinator.com","id":"cus_BRsEJtkXRxHxPU","livemode":false,"metadata":{},"shipping":null,"sources":{"total_count":0,"has_more":false,"url":"/v1/customers/cus_BRsEJtkXRxHxPU/sources","data":[]},"subscriptions":{"total_count":0,"has_more":false,"url":"/v1/customers/cus_BRsEJtkXRxHxPU/subscriptions","data":[]}}]')]]
+        ];
+    }
+
     public static function getCustomer()
     {
         return [
-            [[new Response(200, [], '{"account_balance":0,"business_vat_id":"","currency":"","created":1506114908,"default_source":null,"deleted":false,"delinquent":false,"description":"First test","discount":null,"email":"test@roundpartner.co.uk","id":"cus_BRsEJtkXRxHxPU","livemode":false,"metadata":{},"shipping":null,"sources":{"total_count":0,"has_more":false,"url":"/v1/customers/cus_BRsEJtkXRxHxPU/sources","data":[]},"subscriptions":{"total_count":0,"has_more":false,"url":"/v1/customers/cus_BRsEJtkXRxHxPU/subscriptions","data":[]}}')]]
+            [[new Response(200, [], '{"account_balance":0,"business_vat_id":"","currency":"","created":1506114908,"default_source":null,"deleted":false,"delinquent":false,"description":"First test","discount":null,"email":"example@mailinator.com","id":"cus_BRsEJtkXRxHxPU","livemode":false,"metadata":{},"shipping":null,"sources":{"total_count":0,"has_more":false,"url":"/v1/customers/cus_BRsEJtkXRxHxPU/sources","data":[]},"subscriptions":{"total_count":0,"has_more":false,"url":"/v1/customers/cus_BRsEJtkXRxHxPU/subscriptions","data":[]}}')]]
         ];
     }
 
