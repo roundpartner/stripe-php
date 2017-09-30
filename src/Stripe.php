@@ -101,7 +101,9 @@ class Stripe extends RestClient
             'token' => $token,
         ];
         try {
-            $response = $this->client->put('/customer/' . $id . '/card', $data);
+            $response = $this->client->put('/customer/' . $id . '/card', [
+                'json' => $data
+            ]);
         } catch (ClientException $exception) {
             $response = $exception->getResponse();
             $json = json_decode($response->getBody());
