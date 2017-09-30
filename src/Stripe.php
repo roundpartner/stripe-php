@@ -3,6 +3,7 @@
 namespace RoundPartner\Stripe;
 
 use GuzzleHttp\Exception\ClientException;
+use RoundPartner\Stripe\Exception\CardException;
 use RoundPartner\Stripe\Exception\CustomerNotFoundException;
 
 class Stripe extends RestClient
@@ -86,9 +87,18 @@ class Stripe extends RestClient
             'token' => $token,
             'discount' => $discount,
         ];
-        $response = $this->client->post('/customer', [
-            'json' => $data
-        ]);
+        try {
+            $response = $this->client->post('/customer', [
+                'json' => $data
+            ]);
+        } catch (ClientException $exception) {
+            $response = $exception->getResponse();
+            $json = json_decode($response->getBody());
+            if (402 === $json->error->status) {
+                throw new CardException($json->error->message, $json->error->status, $exception);
+            }
+            throw $exception;
+        }
         if (200 !== $response->getStatusCode()) {
             return false;
         }
@@ -107,8 +117,8 @@ class Stripe extends RestClient
         } catch (ClientException $exception) {
             $response = $exception->getResponse();
             $json = json_decode($response->getBody());
-            if (404 === $json->error->status) {
-                throw new CustomerNotFoundException($json->error->message, $json->error->status, $exception);
+            if (402 === $json->error->status) {
+                throw new CardException($json->error->message, $json->error->status, $exception);
             }
             throw $exception;
         }
