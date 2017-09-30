@@ -94,4 +94,25 @@ class Stripe extends RestClient
         }
         return json_decode($response->getBody());
     }
+
+    public function updateCustomerCard($id, $token)
+    {
+        $data = [
+            'token' => $token,
+        ];
+        try {
+            $response = $this->client->put('/customer/' . $id . '/card', $data);
+        } catch (ClientException $exception) {
+            $response = $exception->getResponse();
+            $json = json_decode($response->getBody());
+            if (404 === $json->error->status) {
+                throw new CustomerNotFoundException($json->error->message, $json->error->status, $exception);
+            }
+            throw $exception;
+        }
+        if (200 !== $response->getStatusCode()) {
+            return false;
+        }
+        return json_decode($response->getBody());
+    }
 }

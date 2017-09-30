@@ -98,6 +98,19 @@ class StripeTest extends TestCase
     /**
      * @param Response[] $responses
      *
+     * @dataProvider \Test\Provider\ResponseProvider::UpdateCard()
+     */
+    public function testUpdateCustomerCard($responses)
+    {
+        $client = $this->getClientMock($responses);
+        $this->instance->setClient($client);
+        $response = $this->instance->updateCustomerCard('cus_12345', 'tok_visa');
+        $this->assertInternalType('object', $response);
+    }
+
+    /**
+     * @param Response[] $responses
+     *
      * @return Client
      */
     protected function getClientMock($responses)
