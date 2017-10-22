@@ -40,24 +40,31 @@ class ResponseProvider
         ];
     }
 
-    public static function GetCustomerNotFound()
+    public static function getCustomerNotFound()
     {
         return [
             [[new Response(400, [], '{"error":{"message":"No such customer: cus_BRsEJtkXRxHxP","param":"id","request_id":"req_wUNf8y1QwLKc5X","status":404,"type":"invalid_request_error"}}')]]
         ];
     }
 
-    public static function NewCustomer()
+    public static function newCustomer()
     {
         return [
             [[new Response(200, [], '{"account_balance":0,"business_vat_id":"","currency":"","created":1506201248,"default_source":null,"deleted":false,"delinquent":false,"description":"","discount":null,"email":"example@mailinator.com","id":"cus_BSFRjgaYbKzgKD","livemode":false,"metadata":{"account_id":"1"},"shipping":null,"sources":{"total_count":0,"has_more":false,"url":"/v1/customers/cus_BSFRjgaYbKzgKD/sources","data":[]},"subscriptions":{"total_count":0,"has_more":false,"url":"/v1/customers/cus_BSFRjgaYbKzgKD/subscriptions","data":[]}}')]]
         ];
     }
 
-    public static function UpdateCard()
+    public static function updateCard()
     {
         return [
             [[new Response(200, [], '{"account_balance":0,"business_vat_id":"","currency":"","created":1506792577,"default_source":"card_1B7ouiE6Cs3pyAhaAXzDqQSb","deleted":false,"delinquent":false,"description":"Added by go test","discount":null,"email":"example@mailinator.com","id":"cus_BUoP6KtXPL3ajU","livemode":false,"metadata":{"account":"1","discount":"30"},"shipping":null,"sources":{"total_count":2,"has_more":false,"url":"/v1/customers/cus_BUoP6KtXPL3ajU/sources","data":[{"address_line1":"","address_line1_check":"","address_line2":"","brand":"MasterCard","cvc_check":"","country":"US","address_city":"","address_country":"","currency":"","default_for_currency":false,"deleted":false,"description":"","dynamic_last4":"","fingerprint":"goN5t3jF1rYxC5UV","funding":"debit","id":"card_1B7ouiE6Cs3pyAhaAXzDqQSb","iin":"","issuer":"","last4":"8210","metadata":{},"exp_month":8,"name":"","recipient":null,"address_state":"","three_d_secure":null,"tokenization_method":"","exp_year":2019,"address_zip":"","address_zip_check":"","customer":"cus_BUoP6KtXPL3ajU","object":"card"},{"address_line1":"","address_line1_check":"","address_line2":"","brand":"Visa","cvc_check":"","country":"GB","address_city":"","address_country":"","currency":"","default_for_currency":false,"deleted":false,"description":"","dynamic_last4":"","fingerprint":"1YRVKbY3dKZLlN3o","funding":"credit","id":"card_1B7omTE6Cs3pyAha2ENXa3ub","iin":"","issuer":"","last4":"0000","metadata":{},"exp_month":8,"name":"","recipient":null,"address_state":"","three_d_secure":null,"tokenization_method":"","exp_year":2019,"address_zip":"","address_zip_check":"","customer":"cus_BUoP6KtXPL3ajU","object":"card"}]},"subscriptions":{"total_count":0,"has_more":false,"url":"/v1/customers/cus_BUoP6KtXPL3ajU/subscriptions","data":[]}}')]]
+        ];
+    }
+
+    public static function badJsonResponse()
+    {
+        return [
+            [[new Response(200, [], '{"account_balance":0,"business_vat_id":"","currency":"","created":1506201248,"default_source":null,"deleted":false,"delinquent":false,"description":"","discount":null,"email":"example@mailinator.com","id":"cus_BSFRjgaYbKzgKD","livemode":false,"metadata":{"account_id":"1"},"shipping":null,"sources":{"total_count":0,"has_more":false,"url":"/v1/customers/cus_BSFRjgaYbKzgKD/sources","data":[]},"subscriptions":{"total_count":0,"has_more":false,"url":"/v1/customers/cus_BSFRjgaYbKzgKD/subscriptions","data":[]}}{"error":{"charge":"ch_1B4lBPE6Cs3pyAhaIvaiLPFR","code":"card_declined","message":"Your card was declined.","request_id":"req_7vc2Sv3BxB5JAC","status":402,"type":"card_error"}}')]]
         ];
     }
 }

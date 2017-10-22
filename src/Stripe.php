@@ -76,6 +76,9 @@ class Stripe extends RestClient
      * @param string $token
      * @param int $discount
      *
+     * @throws ClientException
+     * @throws \Exception
+     *
      * @return object
      */
     public function newCustomer($account, $description, $email, $token = null, $discount = null)
@@ -102,7 +105,11 @@ class Stripe extends RestClient
         if (200 !== $response->getStatusCode()) {
             return false;
         }
-        return json_decode($response->getBody());
+        $json = json_decode($response->getBody());
+        if (null === $json) {
+            throw new \Exception(json_last_error_msg());
+        }
+        return $json;
     }
 
     public function updateCustomerCard($id, $token)

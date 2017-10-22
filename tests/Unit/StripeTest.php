@@ -73,7 +73,7 @@ class StripeTest extends TestCase
      *
      * @expectedException \RoundPartner\Stripe\Exception\CustomerNotFoundException
      *
-     * @dataProvider \Test\Provider\ResponseProvider::GetCustomerNotFound()
+     * @dataProvider \Test\Provider\ResponseProvider::getCustomerNotFound()
      */
     public function testCustomerNotFound($responses)
     {
@@ -85,7 +85,7 @@ class StripeTest extends TestCase
     /**
      * @param Response[] $responses
      *
-     * @dataProvider \Test\Provider\ResponseProvider::NewCustomer
+     * @dataProvider \Test\Provider\ResponseProvider::newCustomer
      */
     public function testNewCustomer($responses)
     {
@@ -98,7 +98,21 @@ class StripeTest extends TestCase
     /**
      * @param Response[] $responses
      *
-     * @dataProvider \Test\Provider\ResponseProvider::UpdateCard()
+     * @expectedException \Exception
+     *
+     * @dataProvider \Test\Provider\ResponseProvider::badJsonResponse()
+     */
+    public function testNewCustomerReturnsBadJson($responses)
+    {
+        $client = $this->getClientMock($responses);
+        $this->instance->setClient($client);
+        $this->instance->newCustomer("1", "Test Payment", "example@mailinator.com", "tok_visa");
+    }
+
+    /**
+     * @param Response[] $responses
+     *
+     * @dataProvider \Test\Provider\ResponseProvider::updateCard()
      */
     public function testUpdateCustomerCard($responses)
     {
