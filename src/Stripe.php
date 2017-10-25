@@ -45,6 +45,22 @@ class Stripe extends RestClient
     }
 
     /**
+     * @return object[]
+     */
+    public function customers()
+    {
+        try {
+            $response = $this->client->get('/customer');
+        } catch (ClientException $exception) {
+            throw $exception;
+        }
+        if (200 !== $response->getStatusCode()) {
+            return [];
+        }
+        return $this->decodeJson($response);
+    }
+
+    /**
      * @param string $id
      *
      * @return object
@@ -105,11 +121,7 @@ class Stripe extends RestClient
         if (200 !== $response->getStatusCode()) {
             return false;
         }
-        $json = json_decode($response->getBody());
-        if (null === $json) {
-            throw new \Exception(json_last_error_msg());
-        }
-        return $json;
+        return $this->decodeJson($response);
     }
 
     public function updateCustomerCard($id, $token)
@@ -133,5 +145,21 @@ class Stripe extends RestClient
             return false;
         }
         return json_decode($response->getBody());
+    }
+
+    /**
+     * @param \Psr\Http\Message\ResponseInterface $response
+     *
+     * @return mixed
+     *
+     * @throws \Exception
+     */
+    private function decodeJson($response)
+    {
+        $json = json_decode($response->getBody());
+        if (null === $json) {
+            throw new \Exception(json_last_error_msg());
+        }
+        return $json;
     }
 }

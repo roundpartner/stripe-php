@@ -26,6 +26,9 @@ class ResponseProvider
         ];
     }
 
+    /**
+     * @return Response[]
+     */
     public static function getCustomers()
     {
         return [
@@ -33,6 +36,9 @@ class ResponseProvider
         ];
     }
 
+    /**
+     * @return Response[]
+     */
     public static function getCustomer()
     {
         return [
@@ -40,6 +46,9 @@ class ResponseProvider
         ];
     }
 
+    /**
+     * @return Response[]
+     */
     public static function getCustomerNotFound()
     {
         return [
@@ -47,6 +56,9 @@ class ResponseProvider
         ];
     }
 
+    /**
+     * @return Response[]
+     */
     public static function newCustomer()
     {
         return [
@@ -54,6 +66,9 @@ class ResponseProvider
         ];
     }
 
+    /**
+     * @return Response[]
+     */
     public static function updateCard()
     {
         return [
@@ -61,6 +76,9 @@ class ResponseProvider
         ];
     }
 
+    /**
+     * @return Response[]
+     */
     public static function badJsonResponse()
     {
         return [

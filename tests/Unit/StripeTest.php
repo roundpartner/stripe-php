@@ -58,6 +58,19 @@ class StripeTest extends TestCase
     /**
      * @param Response[] $responses
      *
+     * @dataProvider \Test\Provider\ResponseProvider::getCustomers()
+     */
+    public function testCustomers($responses)
+    {
+        $client = $this->getClientMock($responses);
+        $this->instance->setClient($client);
+        $response = $this->instance->customers();
+        $this->assertCount(1, $response);
+    }
+
+    /**
+     * @param Response[] $responses
+     *
      * @dataProvider \Test\Provider\ResponseProvider::getCustomer()
      */
     public function testCustomer($responses)
