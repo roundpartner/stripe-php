@@ -87,9 +87,9 @@ class Stripe extends RestClient
 
     /**
      * @param string $account
+     * @param string $user
      * @param string $description
      * @param string $email
-     * @param string $token
      * @param int $discount
      *
      * @throws ClientException
@@ -97,13 +97,13 @@ class Stripe extends RestClient
      *
      * @return object
      */
-    public function newCustomer($account, $description, $email, $token = null, $discount = null)
+    public function newCustomer($account, $user, $description, $email, $discount = null)
     {
         $data = [
             'account' => $account,
+            'user' => $user,
             'desc' => $description,
             'email' => $email,
-            'token' => $token,
             'discount' => $discount,
         ];
         try {

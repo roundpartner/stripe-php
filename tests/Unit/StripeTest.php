@@ -104,7 +104,7 @@ class StripeTest extends TestCase
     {
         $client = $this->getClientMock($responses);
         $this->instance->setClient($client);
-        $response = $this->instance->newCustomer("1", "Test Payment", "example@mailinator.com", "tok_visa");
+        $response = $this->instance->newCustomer("1", "2", "Test Payment", "example@mailinator.com");
         $this->assertInternalType('object', $response);
     }
 
@@ -119,7 +119,7 @@ class StripeTest extends TestCase
     {
         $client = $this->getClientMock($responses);
         $this->instance->setClient($client);
-        $this->instance->newCustomer("1", "Test Payment", "example@mailinator.com", "tok_visa");
+        $this->instance->newCustomer("1", "2", "Test Payment", "example@mailinator.com");
     }
 
     /**
