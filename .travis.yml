@@ -11,7 +11,7 @@ matrix:
   allow_failures:
     - php: '7.0'
   fast_finish: true
-  
+
 git:
   depth: 1
 
