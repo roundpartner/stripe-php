@@ -46,6 +46,9 @@ class Stripe extends RestClient
 
     /**
      * @return object[]
+     *
+     * @throws ClientException
+     * @throws \Exception
      */
     public function customers()
     {
