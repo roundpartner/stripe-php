@@ -138,6 +138,21 @@ class StripeTest extends TestCase
     /**
      * @param Response[] $responses
      *
+     * @dataProvider \Test\Provider\ResponseProvider::getCustomer()
+     *
+     * @throws \Exception
+     */
+    public function testUpdateCustomerEmail($responses)
+    {
+        $client = $this->getClientMock($responses);
+        $this->instance->setClient($client);
+        $response = $this->instance->updateCustomerEmail('cus_12345', 'test@mailinator.com');
+        $this->assertInternalType('object', $response);
+    }
+
+    /**
+     * @param Response[] $responses
+     *
      * @return Client
      */
     protected function getClientMock($responses)
