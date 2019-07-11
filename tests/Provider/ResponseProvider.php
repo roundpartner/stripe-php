@@ -69,6 +69,16 @@ class ResponseProvider
     /**
      * @return Response[]
      */
+    public static function getCustomerSubscription()
+    {
+        return [
+            [[new Response(200, [], '[{}]')]]
+        ];
+    }
+
+    /**
+     * @return Response[]
+     */
     public static function updateCard()
     {
         return [

@@ -153,6 +153,19 @@ class StripeTest extends TestCase
     /**
      * @param Response[] $responses
      *
+     * @dataProvider \Test\Provider\ResponseProvider::getCustomerSubscription()
+     */
+    public function testCustomerSubscription($responses)
+    {
+        $client = $this->getClientMock($responses);
+        $this->instance->setClient($client);
+        $response = $this->instance->customerSubscriptions('cus_12345');
+        $this->assertCount(1, $response);
+    }
+
+    /**
+     * @param Response[] $responses
+     *
      * @return Client
      */
     protected function getClientMock($responses)

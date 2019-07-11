@@ -180,6 +180,31 @@ class Stripe extends RestClient
     }
 
     /**
+     * @param string $id
+     *
+     * @return object
+     *
+     * @throws CustomerNotFoundException
+     */
+    public function customerSubscriptions($id)
+    {
+        try {
+            $response = $this->client->get('/customer/' . $id . '/subscription');
+        } catch (ClientException $exception) {
+            $response = $exception->getResponse();
+            $json = json_decode($response->getBody());
+            if (404 === $json->error->status) {
+                throw new CustomerNotFoundException($json->error->message, $json->error->status, $exception);
+            }
+            throw $exception;
+        }
+        if (200 !== $response->getStatusCode()) {
+            return [];
+        }
+        return json_decode($response->getBody());
+    }
+
+    /**
      * @param \Psr\Http\Message\ResponseInterface $response
      *
      * @return mixed
