@@ -118,6 +118,33 @@ class Stripe extends RestClient
     }
 
     /**
+     * @param string $id
+     * @param string $coupon
+     *
+     * @return object
+     *
+     * @throws CardException
+     */
+    public function updateCustomerCoupon($id, $coupon)
+    {
+        try {
+            $response = $this->client->put('/customer/' . $id . '/discount/' . $coupon, [
+            ]);
+        } catch (ClientException $exception) {
+            $response = $exception->getResponse();
+            $json = json_decode($response->getBody());
+            if (402 === $json->error->status) {
+                throw new CardException($json->error->message, $json->error->status, $exception);
+            }
+            throw $exception;
+        }
+        if (200 !== $response->getStatusCode()) {
+            return false;
+        }
+        return json_decode($response->getBody());
+    }
+
+    /**
      * @param string $account
      * @param string $user
      * @param string $description
