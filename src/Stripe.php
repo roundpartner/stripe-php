@@ -3,6 +3,7 @@
 namespace RoundPartner\Stripe;
 
 use GuzzleHttp\Exception\ClientException;
+use RoundPartner\Stripe\Entity\Customer;
 use RoundPartner\Stripe\Exception\CardException;
 use RoundPartner\Stripe\Exception\CustomerNotFoundException;
 
@@ -43,7 +44,7 @@ class Stripe extends RestClient
     }
 
     /**
-     * @return object[]
+     * @return Customer[]
      *
      * @throws ClientException
      * @throws \Exception
@@ -64,7 +65,7 @@ class Stripe extends RestClient
     /**
      * @param string $id
      *
-     * @return object
+     * @return Customer
      *
      * @throws CustomerNotFoundException
      */
